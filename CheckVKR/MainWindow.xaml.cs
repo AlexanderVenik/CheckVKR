@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace CheckVKR
 {
@@ -23,6 +14,37 @@ namespace CheckVKR
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Открытия диалогового окна и обработка выбора файлов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                Filter = "Doc files (*.docx)|*.docx| All files (*.*)|*.*"
+            };
+            
+            if (openFileDialog.ShowDialog() == true)
+            {
+                foreach (var path in openFileDialog.FileNames)
+                {
+                    var btnForOpenFile = new Button
+                    {
+                        Content = Path.GetFileName(path),
+                        Width = 200,
+                        Height = 40
+                    };
+
+                    StackOpenFiles.Items.Add(btnForOpenFile);
+                    StackOpenFiles.Items.Remove(StartLabelforErrors);
+                }
+            }
         }
     }
 }

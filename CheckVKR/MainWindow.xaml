@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CheckVKR"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Проверка ВКР" Height="600" Width="1000"
+>
+    <DockPanel>
+        <!-- Верхняя панель
+            1. Кнопка на добавление файла
+         -->
+        <StackPanel DockPanel.Dock="Top" 
+                    Orientation="Horizontal" 
+                    Height="30"
+        >
+            <!-- Добавить файл -->
+            <Button Content="AddFile" 
+                    Width="100"
+                    Click="OpenFile"
+                    ClickMode="Release"
+                    Name="BtnAddFile"
+            />
+        </StackPanel>
 
-    </Grid>
+        <!-- Список всех файло -->
+        <StackPanel DockPanel.Dock="Left">
+            <ListBox Name="StackOpenFiles"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+            >
+                <Label Content="Здесь добавленные файлы" 
+                       Width="200" 
+                       Height="40"
+                       Name="StartLabelForAddedFiles"
+                />
+            </ListBox>
+            
+        </StackPanel>
+        
+        <!-- ТИПО Панель с ошибками -->
+        <StackPanel DockPanel.Dock="Right" Width="200">
+            <Label Content="Здесь будут показаны ошибки" 
+                   Width="200" 
+                   Height="40"
+                   Name="StartLabelforErrors"
+            />
+        </StackPanel>
+        <Button Background="Aquamarine"/>
+    </DockPanel>
 </Window>
